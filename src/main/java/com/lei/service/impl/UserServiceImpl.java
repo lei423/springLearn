@@ -5,6 +5,9 @@ import com.lei.service.UserService;
 
 public class UserServiceImpl implements UserService {
 
+        public UserServiceImpl() {
+                System.out.println("UserService实例化");
+        }
         private UserDao userDao;
 
         //BeanFactory去调用该方法，从容器中获得userDao设置到此处
