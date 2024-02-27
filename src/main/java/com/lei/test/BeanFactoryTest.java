@@ -1,4 +1,4 @@
-package com.lei.service.test;
+package com.lei.test;
 
 import com.lei.dao.UserDao;
 import com.lei.service.UserService;
