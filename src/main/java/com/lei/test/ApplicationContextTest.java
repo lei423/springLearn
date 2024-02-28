@@ -20,9 +20,25 @@ public class ApplicationContextTest {
                  * 是配置文件加载，容器一创建就将Bean都实例化并初始化好。
                  */
 
-                ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+                //ApplicationContext applicationContext1 = new ClassPathXmlApplicationContext("applicationContext.xml");
+                ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+
+                //构造方式实例化
                 UserService userService = (UserService) applicationContext.getBean("userService");
                 System.out.println(userService);
 
+                //静态工厂方式实例化
+                Object userDao1 = applicationContext.getBean("userDao1");
+                System.out.println(userDao1);
+
+                //实例工厂方式实例化
+                Object userDao2 = applicationContext.getBean("userDao2");
+                System.out.println(userDao2);
+
+                //FactoryBean方式实例化
+                Object userDao3 = applicationContext.getBean("userDao3");
+                System.out.println(userDao3);
+
+                applicationContext.close();
         }
 }

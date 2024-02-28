@@ -1,10 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+       xmlns:context="http://www.springframework.org/schema/context"
+
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder></context:property-placeholder>
+
+<!--    静态工厂方式-->
+    <bean id="userDao1" class="com.lei.factory.MyBeanFactory1" factory-method="userDao"></bean>
+
+    <!--    实例工厂方式-->
+    <!--    配置工厂对象-->
+    <bean id="beanFactory2" class="com.lei.factory.MyBeanFactory2"></bean>
+    <bean id="userDao2" factory-bean="beanFactory2" factory-method="userDao"></bean>
+
+<!--    FactoryBean方式实例-->
+    <bean id="userDao3" class="com.lei.factory.MyBeanFactory3"></bean>
 
     <!--配置UserServiceImpl-->
     <bean id="userService" class="com.lei.service.impl.UserServiceImpl">
+<!--        <constructor-arg name="name" value="lei"></constructor-arg>-->
         <property name="userDao" ref="userDao"></property>
     </bean>
 
