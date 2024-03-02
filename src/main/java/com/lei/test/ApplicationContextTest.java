@@ -1,8 +1,12 @@
 package com.lei.test;
 
+import com.alibaba.druid.pool.DruidDataSource;
 import com.lei.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
 
 public class ApplicationContextTest {
         public static void main(String[] args) {
@@ -20,11 +24,22 @@ public class ApplicationContextTest {
                  * 是配置文件加载，容器一创建就将Bean都实例化并初始化好。
                  */
 
+                /**
+                 * Bean 实例化的基本流程
+                 * Spring容器在进行初始化时，会将xml配置的<bean>的信息封装成一个BeanDefinition对象，所有的
+                 * BeanDefinition存储到一个名为beanDefinitionMap的Map集合中去，Spring框架在对该Map进行遍历，使用反
+                 * 射创建Bean实例对象，创建好的Bean对象存储在一个名为singletonObjects的Map集合中，当调用getBean方法
+                 * 时则最终从该Map集合中取出Bean实例对象返回
+                 */
+
                 //ApplicationContext applicationContext1 = new ClassPathXmlApplicationContext("applicationContext.xml");
                 ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
 
                 //构造方式实例化
-                UserService userService = (UserService) applicationContext.getBean("userService");
+//                UserService userService = (UserService) applicationContext.getBean("userService");
+//                System.out.println(userService);
+
+                UserService userService = applicationContext.getBean("userService", UserService.class);
                 System.out.println(userService);
 
                 //静态工厂方式实例化
@@ -38,6 +53,9 @@ public class ApplicationContextTest {
                 //FactoryBean方式实例化
                 Object userDao3 = applicationContext.getBean("userDao3");
                 System.out.println(userDao3);
+
+                DruidDataSource druidDataSource = new DruidDataSource();
+
 
                 applicationContext.close();
         }

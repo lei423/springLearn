@@ -12,6 +12,8 @@
 
     <context:property-placeholder></context:property-placeholder>
 
+
+
 <!--    静态工厂方式-->
     <bean id="userDao1" class="com.lei.factory.MyBeanFactory1" factory-method="userDao"></bean>
 
@@ -31,5 +33,13 @@
 
     <!--配置UserDaoImpl-->
     <bean id="userDao" class="com.lei.dao.impl.UserDaoImpl"></bean>
+
+    <!--配置数据源信息-->
+<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/mybatis"></property>-->
+<!--        <property name="username" value="root"></property>-->
+<!--        <property name="password" value="root"></property>-->
+<!--    </bean>-->
 
 </beans>
