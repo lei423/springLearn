@@ -12,13 +12,15 @@
 
     <context:property-placeholder></context:property-placeholder>
 
+
+
 <!--    静态工厂方式-->
     <bean id="userDao1" class="com.lei.factory.MyBeanFactory1" factory-method="userDao"></bean>
 
     <!--    实例工厂方式-->
     <!--    配置工厂对象-->
-    <bean id="beanFactory2" class="com.lei.factory.MyBeanFactory2"></bean>
-    <bean id="userDao2" factory-bean="beanFactory2" factory-method="userDao"></bean>
+<!--    <bean id="beanFactory2" class="com.lei.factory.MyBeanFactory2"></bean>-->
+<!--    <bean id="userDao2" factory-bean="beanFactory2" factory-method="userDao"></bean>-->
 
 <!--    FactoryBean方式实例-->
     <bean id="userDao3" class="com.lei.factory.MyBeanFactory3"></bean>
@@ -26,10 +28,31 @@
     <!--配置UserServiceImpl-->
     <bean id="userService" class="com.lei.service.impl.UserServiceImpl">
 <!--        <constructor-arg name="name" value="lei"></constructor-arg>-->
-        <property name="userDao" ref="userDao"></property>
+<!--        <property name="userDao" ref="userDao"></property>-->
     </bean>
 
     <!--配置UserDaoImpl-->
-    <bean id="userDao" class="com.lei.dao.impl.UserDaoImpl"></bean>
+    <bean id="userDao" class="com.lei.dao.impl.UserDaoImpl" init-method="init"></bean>
+
+    <!--配置数据源信息-->
+<!--    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">-->
+<!--        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>-->
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/mybatis"></property>-->
+<!--        <property name="username" value="root"></property>-->
+<!--        <property name="password" value="root"></property>-->
+<!--    </bean>-->
+
+<!--    BeanFactoryPostProcessor-->
+<!--    <bean class="com.lei.peocessor.MyBeanFactoryPostProcessor"></bean>-->
+    <bean class="com.lei.peocessor.MyBeanDefinitionRegisteryPostProcessor"></bean>
+
+<!--    自定义注解-->
+    <bean class="com.lei.peocessor.MyComponentBeanFactoryPostProcessor"></bean>
+
+    <!--BeanPostProcessor-->
+<!--    <bean class="com.lei.peocessor.MyBeanPostProcessor"></bean>-->
+
+    <!--TimeLog-->
+    <bean class="com.lei.peocessor.TimeLogBeanPostPocessor"></bean>
 
 </beans>

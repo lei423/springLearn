@@ -1,6 +1,8 @@
 package com.lei.test;
 
 import com.alibaba.druid.pool.DruidDataSource;
+import com.lei.beans.OtherBean;
+import com.lei.dao.PersonDao;
 import com.lei.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -47,8 +49,8 @@ public class ApplicationContextTest {
                 System.out.println(userDao1);
 
                 //实例工厂方式实例化
-                Object userDao2 = applicationContext.getBean("userDao2");
-                System.out.println(userDao2);
+//                Object userDao2 = applicationContext.getBean("userDao2");
+//                System.out.println(userDao2);
 
                 //FactoryBean方式实例化
                 Object userDao3 = applicationContext.getBean("userDao3");
@@ -56,6 +58,12 @@ public class ApplicationContextTest {
 
                 DruidDataSource druidDataSource = new DruidDataSource();
 
+                PersonDao personDao = applicationContext.getBean(PersonDao.class);
+                System.out.println(personDao);
+
+                //自定义注解
+//                OtherBean bean = applicationContext.getBean(OtherBean.class);
+//                System.out.println(bean);
 
                 applicationContext.close();
         }
